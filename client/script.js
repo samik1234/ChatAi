@@ -10,10 +10,10 @@ function loader(element) {
     element.textContent = ''
 
     loadInterval = setInterval(() => {
-        // Update the text content of the loading indicator
+      
         element.textContent += '.';
 
-        // If the loading indicator has reached three dots, reset it
+     
         if (element.textContent === '....') {
             element.textContent = '';
         }
@@ -33,9 +33,7 @@ function typeText(element, text) {
     }, 20)
 }
 
-// generate unique ID for each message div of bot
-// necessary for typing text effect for that specific reply
-// without unique ID, typing text will work on every element
+
 function generateUniqueId() {
     const timestamp = Date.now();
     const randomNumber = Math.random();
@@ -101,7 +99,7 @@ const handleSubmit = async (e) => {
 
     if (response.ok) {
         const data = await response.json();
-        const parsedData = data.bot.trim() // trims any trailing spaces/'\n' 
+        const parsedData = data.bot.trim() 
 
         typeText(messageDiv, parsedData)
     } else {
