@@ -4,16 +4,16 @@ import user from './assets/user.svg';
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
 
-let loadInterval
+let loadInterval;
 
 function loader(element) {
-    element.textContent = ''
+    element.textContent = '';
 
     loadInterval = setInterval(() => {
-      
+
         element.textContent += '.';
 
-     
+
         if (element.textContent === '....') {
             element.textContent = '';
         }
@@ -42,6 +42,7 @@ function generateUniqueId() {
     return `id-${timestamp}-${hexadecimalString}`;
 }
 
+
 function chatStripe(isAi, value, uniqueId) {
     return (
         `
@@ -49,7 +50,7 @@ function chatStripe(isAi, value, uniqueId) {
             <div class="chat">
                 <div class="profile">
                     <img 
-                      src=${isAi ? bot : user} 
+                      src="${isAi ? bot : user}"
                       alt="${isAi ? 'bot' : 'user'}" 
                     />
                 </div>
@@ -59,7 +60,6 @@ function chatStripe(isAi, value, uniqueId) {
     `
     )
 }
-
 const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -75,14 +75,14 @@ const handleSubmit = async (e) => {
     const uniqueId = generateUniqueId()
     chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
 
-    // to focus scroll to the bottom 
+
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    // specific message div 
+
     const messageDiv = document.getElementById(uniqueId)
 
-    // messageDiv.innerHTML = "..."
-    loader(messageDiv)
+  
+    loader(messageDiv);
 
     const response = await fetch('https://chatting-31tv.onrender.com/', {
         method: 'POST',
@@ -94,23 +94,23 @@ const handleSubmit = async (e) => {
         })
     })
 
-    clearInterval(loadInterval)
-    messageDiv.innerHTML = " "
+    clearInterval(loadInterval);
+    messageDiv.innerHTML = " ";
 
     if (response.ok) {
         const data = await response.json();
-        const parsedData = data.bot.trim() 
+        const parsedData = data.bot.trim() ;
 
-        typeText(messageDiv, parsedData)
+        typeText(messageDiv, parsedData);
     } else {
-        const err = await response.text()
+        const err = await response.text();
 
-        messageDiv.innerHTML = "Something went wrong"
+        messageDiv.innerHTML = "Something went wrong";
         alert(err)
     }
 }
 
-form.addEventListener('submit', handleSubmit)
+form.addEventListener('submit', handleSubmit);
 form.addEventListener('keyup', (e) => {
     if (e.keyCode === 13) {
         handleSubmit(e)
