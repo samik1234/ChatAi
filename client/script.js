@@ -84,10 +84,10 @@ const handleSubmit = async (e) => {
   
     loader(messageDiv);
 
-    const response = await fetch('https://chatting-31tv.onrender.com/', {
+    const response = await fetch('https://chatting-31tv.onrender.com', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             prompt: data.get('prompt')
