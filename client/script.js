@@ -14,7 +14,7 @@ function loader(element) {
         element.textContent += '.';
 
 
-        if (element.textContent === '....') {
+        if (element.textContext === '....') {
             element.textContent = '';
         }
     }, 300);
@@ -84,7 +84,7 @@ const handleSubmit = async (e) => {
   
     loader(messageDiv);
 
-    const response = await fetch('https://chatting-31tv.onrender.com', {
+    const response = await fetch('https://chatting-31tv.onrender.com/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
