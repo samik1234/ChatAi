@@ -14,7 +14,7 @@ function loader(element) {
         element.textContent += '.';
 
 
-        if (element.textContext === '....') {
+        if (element.textContent === '....') {
             element.textContent = '';
         }
     }, 300);
@@ -61,30 +61,30 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = new FormData(form)
+    const data = new FormData(form);
 
     // user's chatstripe
-    chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
+    chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
 
     // to clear the textarea input 
-    form.reset()
+    form.reset();
 
     // bot's chatstripe
-    const uniqueId = generateUniqueId()
-    chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
+    const uniqueId = generateUniqueId();
+    chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
 
 
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
 
-    const messageDiv = document.getElementById(uniqueId)
+    const messageDiv = document.getElementById(uniqueId);
 
   
     loader(messageDiv);
 
-    const response = await fetch('https://chatting-31tv.onrender.com/', {
+    const response = await fetch('http://localhost:5000', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -113,6 +113,6 @@ const handleSubmit = async (e) => {
 form.addEventListener('submit', handleSubmit);
 form.addEventListener('keyup', (e) => {
     if (e.keyCode === 13) {
-        handleSubmit(e)
+        handleSubmit(e);
     }
 })
